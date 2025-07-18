@@ -4,6 +4,7 @@ import { Command } from "commander";
 import type { ToolTarget } from "../types/index.js";
 import {
   addCommand,
+  convertCommand,
   generateCommand,
   gitignoreCommand,
   importCommand,
@@ -37,6 +38,18 @@ program
   .option("--geminicli", "Import from Gemini CLI (GEMINI.md)")
   .option("-v, --verbose", "Verbose output")
   .action(importCommand);
+
+program
+  .command("convert")
+  .description("Convert AI tool configurations directly between formats")
+  .requiredOption(
+    "--from <tool>",
+    "Source tool to convert from (copilot, cursor, cline, claudecode, roo, geminicli)",
+  )
+  .requiredOption("--to <tools>", "Target tool(s) to convert to (comma-separated)")
+  .option("-b, --base-dir <path>", "Base directory to search for source configurations")
+  .option("-v, --verbose", "Verbose output")
+  .action(convertCommand);
 
 program
   .command("generate")
