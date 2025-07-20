@@ -1,11 +1,10 @@
 import { z } from "zod/mini";
 
-export const ClaudeSettingsSchema = z.looseObject({
-  permissions: z._default(
-    z.looseObject({
-      deny: z._default(z.array(z.string()), []),
+export const ClaudeSettingsSchema = z.object({
+  permissions: z.optional(
+    z.object({
+      deny: z.optional(z.array(z.string())),
     }),
-    { deny: [] },
   ),
 });
 

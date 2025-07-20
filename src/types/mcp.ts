@@ -22,7 +22,21 @@ export const McpServerBaseSchema = z.object({
   kiroAutoBlock: z.optional(z.array(z.string())),
 });
 
-export const RulesyncMcpServerSchema = z.extend(McpServerBaseSchema, {
+export const RulesyncMcpServerSchema = z.object({
+  command: z.optional(z.string()),
+  args: z.optional(z.array(z.string())),
+  url: z.optional(z.string()),
+  httpUrl: z.optional(z.string()),
+  env: z.optional(z.record(z.string(), z.string())),
+  disabled: z.optional(z.boolean()),
+  networkTimeout: z.optional(z.number()),
+  timeout: z.optional(z.number()),
+  trust: z.optional(z.boolean()),
+  cwd: z.optional(z.string()),
+  transport: z.optional(McpTransportTypeSchema),
+  type: z.optional(z.enum(["sse", "streamable-http"])),
+  alwaysAllow: z.optional(z.array(z.string())),
+  tools: z.optional(z.array(z.string())),
   targets: z.optional(RulesyncTargetsSchema),
 });
 
